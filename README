@@ -31,3 +31,17 @@ The code for the filtering and map plotting can be found in `bird_sightings.py`.
 ![Caucasian snowcock sightings in Georgia](./fig/tetraogallus_caucasicus_sightings.png)
 
 As we can see, sightings for both birds are primarily concentrated in the Mtskheta-Mtianeti region in the north-east of the country. Therefore we will focus our analysis on this area.
+
+## Time of Sightings
+
+The time of bird sightings is also important. Different species are most active at different times of the day and your chance of seeing the birds will change along with this.
+
+In `time_of_day.py` we create two simple plots of when the species were sighted based on the hour that the observations started.
+
+![Graph of times of Caucasian grouse sightings](./fig/lyrurus_mlokosiewiczi_time_simple.png)
+
+![Graph of times of Caucasian snowcock sightings](./fig/tetraogallus_caucasicus_time_simple.png)
+
+These graphs are not perfect for two reasons. Firstly, an observation on eBird can span multiple hours. If the start time is 10:00 and the duration is 2.5 hours then the bird could have been spotted at any combination of 10am, 11am, or 12pm.
+
+Secondly, observers may be out looking for the birds more commonly at certain times. While most observations of the birds are in the morning, this does not show whether observers are out more in the morning or whether the birds are more likely to be seen in the morning.
