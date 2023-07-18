@@ -30,7 +30,9 @@ The code for the filtering and map plotting can be found in `bird_sightings.py`.
 
 ![Caucasian snowcock sightings in Georgia](./fig/tetraogallus_caucasicus_sightings.png)
 
-As we can see, sightings for both birds are primarily concentrated in the Mtskheta-Mtianeti region in the north-east of the country. Therefore we will focus our analysis on this area.
+As we can see, sightings for both birds are primarily concentrated in the Mtskheta-Mtianeti region in the north-east of the country. Therefore we will now focus our analysis on this area. The below figure shows the sightings in just the Mtskheta-Mtianeti region.
+
+![Mtskheta-Mtianeti sightings](./fig/regional_sightings.png)
 
 ## Time of Sightings
 
