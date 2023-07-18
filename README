@@ -1,0 +1,21 @@
+# Caucasian Grouse and Snowcock Sightings In Georgia
+
+## Data
+
+Data on bird sightings is from the [eBird Basic Dataset as provided by Cornell Lab](https://science.ebird.org/en/use-ebird-data/download-ebird-data-products). Under the terms of use of the data, the original files cannot be stored on GitHub and so have been included in the `.gitignore`. If you wish to re-run this analysis you will need to download the from eBird and store it in the correct file path.
+
+GeoJSON data for creating maps of Georgia are from [Humanitarian Data Exchange](https://data.humdata.org/dataset/geoboundaries-admin-boundaries-for-georgia). There provide maps of the country at three different resolutions. The relevant files have been stored in the `data` folder.
+
+## Caucasian Grouse and Snowcock Sightings
+
+The first step in sighting these two birds is to look at where they have been sighted in the past. This can be achieved relatively simply by filtering the eBird data for Georgian sightings of the two birds and plotting them on a map.
+
+To ensure that locations are accurate (within a few kilometers) we have filtered out any sightings where the birder travelled over 5km. We have also removed sightings that took place over the timeline of more than 5 hours to keep consistent with future analysis.
+
+The code for the filtering and map plotting can be found in `bird_sightings.py`.
+
+![Caucasian grouse sightings in Georgia](./fig/lyrurus_mlokosiewiczi_sightings.png)
+
+![Caucasian snowcock sightings in Georgia](./fig/tetraogallus_caucasicus_sightings.png)
+
+As we can see, sightings for both birds are primarily concentrated in the Mtskheta-Mtianeti region in the north-east of the country. Therefore we will focus our analysis on this area.
