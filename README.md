@@ -30,7 +30,7 @@ The code for the filtering and map plotting can be found in `bird_sightings.py`.
 
 ![Caucasian snowcock sightings in Georgia](./fig/tetraogallus_caucasicus_sightings.png)
 
-As we can see, sightings for both birds are primarily concentrated in the Mtskheta-Mtianeti region in the north-east of the country. Therefore we will now focus our analysis on this area. The below figure shows the sightings in just the Mtskheta-Mtianeti region.
+As we can see, sightings for both birds are primarily concentrated in the Mtskheta-Mtianeti region in the north-east of the country. Therefore we will now focus our analysis on this area. The below figure, produced by `bird_sightings_kazbeg.py` shows the sightings in just the Mtskheta-Mtianeti region.
 
 ![Mtskheta-Mtianeti sightings](./fig/regional_sightings.png)
 
@@ -47,3 +47,15 @@ In `time_of_day.py` we create two simple plots of when the species were sighted 
 These graphs are not perfect for two reasons. Firstly, an observation on eBird can span multiple hours. If the start time is 10:00 and the duration is 2.5 hours then the bird could have been spotted at any combination of 10am, 11am, or 12pm.
 
 Secondly, observers may be out looking for the birds more commonly at certain times. While most observations of the birds are in the morning, this does not show whether observers are out more in the morning or whether the birds are more likely to be seen in the morning.
+
+## Similarly Sighted Species
+
+Birds rarely inhabit an environment by themselves. If we are looking for the caucasian grouse or caucasian snowcock, what other birds might we spot that could indicate we are in the right environment?
+
+There are several ways of tackling this question with data. The most simple is to look at each checklist and say, whenever a caucasian grouse is spotted, how often do we see each other species? This analysis has been done in `indicator_species.py` but has a major flaw. Whenever we see a caucasian grouse we might have a 90% chance of seeing a blackbird. Great, so a blackbird indicates we are in the right environment? Not necessarily. We might also have a 90% chance of seeing a blackbird even when we don't see a caucasian grouse.
+
+In `cosine_species.py` we also calculate a cosine similarity between the target species and every other species, where each species has been vectorised based on what checklists it is in. The output for the caucasian grouse and caucasian snowcock can be seen below.
+
+![The most similarly seen birds alongside the caucasian birds](./fig/cosine_similars.png)
+
+From this chart we know that if we see one of the caucasian birds then we are likely to see the other one. Ring ouzel, water pipit, northern wheatear, and fire-fronted serin are other birds that are likely to indicate the presence of the two caucasian birds. The blackbird, a bird that our rudimentary analysis suggested was a key indicator, still does appear but it's importance is not as strong.
