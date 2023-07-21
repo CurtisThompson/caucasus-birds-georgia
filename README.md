@@ -18,6 +18,8 @@ Data on bird sightings is from the [eBird Basic Dataset as provided by Cornell L
 
 GeoJSON data for creating maps of Georgia are from [Humanitarian Data Exchange](https://data.humdata.org/dataset/geoboundaries-admin-boundaries-for-georgia). There provide maps of the country at three different resolutions. The relevant files have been stored in the `data` folder.
 
+[Open Topo Data](https://www.opentopodata.org/) is used for elevation data. Although the data can be downloaded, we will use their API.
+
 ## Caucasian Grouse and Snowcock Sightings
 
 The first step in sighting these two birds is to look at where they have been sighted in the past. This can be achieved relatively simply by filtering the eBird data for Georgian sightings of the two birds and plotting them on a map.
