@@ -48,6 +48,26 @@ These graphs are not perfect for two reasons. Firstly, an observation on eBird c
 
 Secondly, observers may be out looking for the birds more commonly at certain times. While most observations of the birds are in the morning, this does not show whether observers are out more in the morning or whether the birds are more likely to be seen in the morning.
 
+An alternative is to model the occurence of the birds and then analyse the models to see what times the birds are most active.
+
+## Modelling Occurence
+
+We will fit a simple XGBoost model (a gradient boosted random tree model) to model the occurence of the two caucasian birds.
+
+The features we will use in our model are: latitude, longitude, month, hour, duration, distance travelled, number of birders, speed of travel, and elevation.
+
+All features can be obtained from the eBird data except for elevation. To obtain elevation we will use the Open Topo Data API, which requires an API call for each row of data. Since we do not have tens of thousands of rows of data this will not be an issue, but we would need an alternative method if we had more checklists.
+
+The modelling is done in `model_occurence.py`.
+
+## Partial Dependence Plots: Optimising Factors
+
+Once we have our model we can create partial dependence plots to see how we can optimise each factor.
+
+![Partial dependence plots for Caucasian grouse sightings](./fig/lyrurus_mlokosiewiczi_partial_dependence_all.png)
+
+![Partial dependence plots for Caucasian snowcock sightings](./fig/tetraogallus_caucasicus_partial_dependence_all.png)
+
 ## Similarly Sighted Species
 
 Birds rarely inhabit an environment by themselves. If we are looking for the caucasian grouse or caucasian snowcock, what other birds might we spot that could indicate we are in the right environment?

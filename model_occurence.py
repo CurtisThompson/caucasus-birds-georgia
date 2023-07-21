@@ -1,8 +1,12 @@
 import pandas as pd
+import numpy as np
+from time import sleep
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import f1_score
 from sklearn.inspection import PartialDependenceDisplay
+import requests
+import json
 import matplotlib.pyplot as plt
 
 RANDOM_STATE = 0
@@ -46,9 +50,21 @@ dfg['MONTH'] = dfg['OBSERVATION DATE'].apply(lambda x: int(x[5:7]))
 dfg['HOUR'] = dfg['TIME OBSERVATIONS STARTED'].apply(lambda x: int(x[:2]))
 dfg['KMPH'] = dfg['EFFORT DISTANCE KM'] * 60 / dfg['DURATION MINUTES']
 
+# Method to calculate elevation based on API
+def request_elevation(lat, lon):
+    try:
+        res = requests.get(f'https://api.opentopodata.org/v1/test-dataset?locations={lat},{lon}').content
+        elevation = json.loads(res)['results'][0]['elevation']
+    except:
+        elevation = np.nan
+        print(f'Failed to retrieve elevation for {lat}, {lon}')
+    return elevation
+
+dfg['ELEVATION'] = dfg.apply(lambda x: request_elevation(x['LATITUDE'], x['LONGITUDE']), axis=1)
+
 # Training columns for models (note: predicted classes are species)
 MODEL_COLS = ['LATITUDE', 'LONGITUDE', 'MONTH', 'HOUR', 'DURATION MINUTES', 'EFFORT DISTANCE KM',
-              'NUMBER OBSERVERS', 'KMPH']
+              'NUMBER OBSERVERS', 'KMPH', 'ELEVATION']
 
 # Debug stats
 print(dfg[MODEL_COLS + SPECIES])
