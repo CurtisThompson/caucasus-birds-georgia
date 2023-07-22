@@ -1,5 +1,17 @@
 # Caucasian Grouse and Snowcock Sightings In Georgia
 
+This project is an analysis of previous sightings of two rare birds, the caucasian grouse and the caucasian snowcock, to assist with planning of an outing to see the birds in the mountains of Georgia. The analysis has been completed in Python with use of ecological and citizen science data. The conclusions of the analysis can be found at the bottom of this document.
+
+## Contents
+1. [Background Information](#background-information)
+2. [Data](#data)
+3. [Caucasian Grouse and Snowcock Sightings](#caucasian-grouse-and-snowcock-sightings)
+4. [Time of Sightings](#time-of-sightings)
+5. [Modelling Occurence](#modelling-occurence)
+6. [Partial Dependence Plots: Optimising Factors](#partial-dependence-plots-optimising-factors)
+7. [Similarly Sighted Species](#similarly-sighted-species)
+8. [Conclusion](#conclusion)
+
 ## Background Information
 
 The caucasian grouse _(Lyrurus mlokosiewiczi)_ and the caucasian snowcock _(tetraogallus caucasicus)_ are two birds endemic to the Caucasus Mountains, meaning that they can only be found in the wild in this region.
