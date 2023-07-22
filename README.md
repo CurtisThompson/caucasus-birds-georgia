@@ -58,9 +58,19 @@ We will fit a simple XGBoost model (a gradient boosted random tree model) to mod
 
 The features we will use in our model are: latitude, longitude, month, hour, duration, distance travelled, number of birders, speed of travel, and elevation.
 
-All features can be obtained from the eBird data except for elevation. To obtain elevation we will use the Open Topo Data API, which requires an API call for each row of data. Since we do not have tens of thousands of rows of data this will not be an issue, but we would need an alternative method if we had more checklists.
+All features can be obtained from the eBird data except for elevation. To obtain elevation we will use the Open Topo Data API, which requires an API call for every hundred data. Since we do not have hundreds of thousands of rows of data this will not be an issue, but we would need an alternative method if we had more checklists.
 
-The modelling is done in `model_occurence.py`.
+The modelling is done in `model_occurence.py`. We split our checklists into a training and validation set using a 90/10 split. The caucasian grouse model has an F1 score of 0.8387. The caucasian snowcock model has an F1 score of 0.6857.
+
+We can create a map of occurence chance by feeding data back into the models for predictions. These maps are centred on the town of Stepantsminda, an easy-to-get-to location where many of the bird sightings have been.
+
+![Possible locations for future Caucasian grouse sightings](./fig/lyrurus_mlokosiewiczi_modelled_map.png)
+
+The map above is from the caucasian grouse map. We can conclude that we have the best chance of seeing a caucasian grouse in the mountains to the west of the town, but there is also the possibility to see them on the hiking trails to the north east as well.
+
+![Possible locations for future Caucasian snowcock sightings](./fig/tetraogallus_caucasicus_modelled_map.png)
+
+The modelling for the caucasian snowcock suggests a more restricted area for spotting the bird. If we want to see the caucasian snowcock we should focus our time on the mountains to the west.
 
 ## Partial Dependence Plots: Optimising Factors
 
@@ -69,6 +79,12 @@ Once we have our model we can create partial dependence plots to see how we can 
 ![Partial dependence plots for Caucasian grouse sightings](./fig/lyrurus_mlokosiewiczi_partial_dependence_all.png)
 
 ![Partial dependence plots for Caucasian snowcock sightings](./fig/tetraogallus_caucasicus_partial_dependence_all.png)
+
+Returning to our previous hypothesis regarding what time to look for the birds, there is a strong preference for birdwatching in the morning. However, for the caucasian grouse we can also search in the evening.
+
+As you would expect, a longer birdwatching journey has a greater chance of seeing these rare birds. In the case of the caucasian grouse we can increase of chances by birdwatching for at least an hour. For the caucasian snowcock we want to birdwatch for as long as possible.
+
+However, for both birds we don't need to cover as much ground as possible. Distance covered does not have a major impact on the model, and there is a preference for travelling at a slower pace (<2kmph).
 
 ## Similarly Sighted Species
 
@@ -81,3 +97,13 @@ In `cosine_species.py` we also calculate a cosine similarity between the target 
 ![The most similarly seen birds alongside the caucasian birds](./fig/cosine_similars.png)
 
 From this chart we know that if we see one of the caucasian birds then we are likely to see the other one. Ring ouzel, water pipit, northern wheatear, and fire-fronted serin are other birds that are likely to indicate the presence of the two caucasian birds. The blackbird, a bird that our rudimentary analysis suggested was a key indicator, still does appear but it's importance is not as strong.
+
+## Conclusion
+
+From our analysis, we can conclude that our best chance of seeing the caucasian grouse and caucasian snowcock in Georgia is by heading to the Mtskheta-Mtianeti region. Specifically we want to head to the mountains to the east of Stepantsminda. For the caucasian grouse we also have a chance of seeing them by walking on the eastern hiking trails.
+
+In terms of our activities, we should head out early in the morning, as the chances of sighting the birds drops off after 10am.
+
+Despite this, we do not need to cover as much ground as possible. It is more important to cover the ground slowly, and to stay out birdwatching for at least an hour. The longer we birdwatch the better, particularly for the caucasian snowcock.
+
+Other birds that we are likely to see are the ring ouzel, water pipit, northern wheatear, and fire-fronted serin. These birds can be used as indicators that we are in the right location to spot the two caucasian birds.
