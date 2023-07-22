@@ -1,19 +1,12 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 
+import utils
+
 # List of species we want a map for
-SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
+SPECIES = utils.get_analysis_species()
 
 # Load bird sightings
-df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')
-# Remove unapproved checklists
-df = df.loc[df['APPROVED'] == 1]
-df.drop(['APPROVED', 'REVIEWED'], axis=1)
-# Remove long checklists as we cannot pinpoint location or time
-df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
-             & (df['DURATION MINUTES'] <= 300)]
-# Filter for the specific region
-df = df.loc[df['STATE CODE'] == 'GE-MM']
+df = utils.load_ebird_data(filter=True, region='GE-MM')
 
 for bird in SPECIES:
     # Find checklists with and without bird
@@ -42,14 +35,11 @@ for bird in SPECIES:
 
     # Make plot look good visually
     plt.tight_layout()
-    ax[0].grid()
-    ax[1].grid()
-    ax[0].set_xlim(0, 1)
-    ax[1].set_xlim(0, 1)
-    ax[0].get_legend().remove()
-    ax[1].get_legend().remove()
+    for subax in ax:
+        subax.grid()
+        subax.set_xlim(0, 1)
+        subax.get_legend().remove()
+        subax.set_xlabel('Frequency')
     ax[0].set_title('Species Present With Bird')
     ax[1].set_title('Species Present Without Bird')
-    ax[0].set_xlabel('Frequency')
-    ax[1].set_xlabel('Frequency')
     fig.savefig(f'./fig/{bird.lower().replace(" ", "_")}_indicators.png', bbox_inches='tight')

@@ -2,19 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
 
+import utils
+
 # List of species we want a map for
-SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
+SPECIES = utils.get_analysis_species()
 
 # Load bird sightings
-df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')
-# Remove unapproved checklists
-df = df.loc[df['APPROVED'] == 1]
-df.drop(['APPROVED', 'REVIEWED'], axis=1)
-# Remove long checklists as we cannot pinpoint location or time
-df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
-             & (df['DURATION MINUTES'] <= 300)]
-# Filter for the specific region
-df = df.loc[df['STATE CODE'] == 'GE-MM']
+df = utils.load_ebird_data(filter=True, region='GE-MM')
 
 # Get a list of checklists and species
 checklists = list(df['SAMPLING EVENT IDENTIFIER'].unique())

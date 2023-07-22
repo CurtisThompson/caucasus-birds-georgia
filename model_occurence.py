@@ -1,6 +1,6 @@
-from time import sleep
 import requests
 import json
+from time import sleep
 
 import pandas as pd
 import numpy as np
@@ -11,21 +11,15 @@ from sklearn.inspection import PartialDependenceDisplay
 import matplotlib.pyplot as plt
 import plotly.express as px
 
+import utils
+
 RANDOM_STATE = 0
 
 # List of species we want a map for
-SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
+SPECIES = utils.get_analysis_species()
 
 # Load bird sightings
-df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')
-# Remove unapproved checklists
-df = df.loc[df['APPROVED'] == 1]
-df.drop(['APPROVED', 'REVIEWED'], axis=1)
-# Remove long checklists as we cannot pinpoint location or time
-df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
-             & (df['DURATION MINUTES'] <= 300)]
-# Filter for the specific region
-df = df.loc[df['STATE CODE'] == 'GE-MM']
+df = utils.load_ebird_data(filter=True, region='GE-MM')
 
 # Group by checklist and get main stats
 dfg = df.groupby('SAMPLING EVENT IDENTIFIER')[['LATITUDE', 'LONGITUDE', 'OBSERVATION DATE',

@@ -1,17 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import utils
+
 # List of species we want a map for
-SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
+SPECIES = utils.get_analysis_species()
 
 # Load bird sightings
-df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')
-# Remove unapproved checklists
-df = df.loc[df['APPROVED'] == 1]
-df.drop(['APPROVED', 'REVIEWED'], axis=1)
-# Remove long checklists as we cannot pinpoint location or time
-df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
-             & (df['DURATION MINUTES'] <= 300)]
+df = utils.load_ebird_data(filter=True, region=None)
 
 # Produce time of day plots for each bird
 for bird in SPECIES:

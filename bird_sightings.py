@@ -3,20 +3,16 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
 
+import utils
+
 # List of species we want a map for
-SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
+SPECIES = utils.get_analysis_species()
 
 # Load Georgia map file
-df_georgia = gpd.read_file('./data/geoBoundaries-GEO-ADM1.geojson')
+df_georgia = utils.load_georgia_map(type='p1')
 
 # Load bird sightings
-df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')
-# Remove unapproved checklists
-df = df.loc[df['APPROVED'] == 1]
-df.drop(['APPROVED', 'REVIEWED'], axis=1)
-# Remove long checklists as we cannot pinpoint location or time
-df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
-             & (df['DURATION MINUTES'] <= 300)]
+df = utils.load_ebird_data(filter=True, region=None)
 
 # Produce map of sightings for each bird
 for bird in SPECIES:
