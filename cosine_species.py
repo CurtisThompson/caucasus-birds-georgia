@@ -1,13 +1,9 @@
 import pandas as pd
-import geopandas as gpd
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
 
 # List of species we want a map for
 SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
-
-# Load Georgia map file
-df_georgia = gpd.read_file('./data/geoBoundaries-GEO-ADM2-KAZBEG.geojson')
 
 # Load bird sightings
 df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')
@@ -64,5 +60,5 @@ for index, bird in enumerate(SPECIES):
     df_sim.plot(kind='barh', ax=ax[index], y='Similarity', x='Common Name')
     ax[index].set_title(f'{bird} Similars')
 
-
+# Save image of similar birds
 fig.savefig(f'./fig/cosine_similars.png', bbox_inches='tight')

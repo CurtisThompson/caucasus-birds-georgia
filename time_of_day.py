@@ -13,6 +13,7 @@ df.drop(['APPROVED', 'REVIEWED'], axis=1)
 df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
              & (df['DURATION MINUTES'] <= 300)]
 
+# Produce time of day plots for each bird
 for bird in SPECIES:
     df_bird = df.copy()
     # Get times of observations for species

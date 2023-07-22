@@ -1,12 +1,8 @@
 import pandas as pd
-import geopandas as gpd
 import matplotlib.pyplot as plt
 
 # List of species we want a map for
 SPECIES = ['Lyrurus mlokosiewiczi', 'Tetraogallus caucasicus']
-
-# Load Georgia map file
-df_georgia = gpd.read_file('./data/geoBoundaries-GEO-ADM2-KAZBEG.geojson')
 
 # Load bird sightings
 df = pd.read_csv('./data/ebd_GE_relMay-2023.txt', delimiter='\t')

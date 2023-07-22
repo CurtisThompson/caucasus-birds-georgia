@@ -18,6 +18,7 @@ df.drop(['APPROVED', 'REVIEWED'], axis=1)
 df = df.loc[(df['EFFORT DISTANCE KM'] <= 5)
              & (df['DURATION MINUTES'] <= 300)]
 
+# Produce map of sightings for each bird
 for bird in SPECIES:
     # Get only that bird
     df_bird = df.copy()

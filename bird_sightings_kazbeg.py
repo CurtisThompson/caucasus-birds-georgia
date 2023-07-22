@@ -24,6 +24,7 @@ df = df.loc[df['STATE CODE'] == 'GE-MM']
 fig, (ax1, ax2) = plt.subplots(1, 2)
 ax = [ax1, ax2]
 
+# Produce map of sightings for each bird
 for index, bird in enumerate(SPECIES):
     # Get only that bird
     df_bird = df.copy()
